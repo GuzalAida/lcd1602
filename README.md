@@ -4,4 +4,4 @@ LCD1602液晶引脚说明
 
 ![](README/breadboard.png)
 
-[code](./displayinfo.ino)
+[code](./displayinfo/displayinfo.ino)

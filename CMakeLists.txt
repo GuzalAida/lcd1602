@@ -8,7 +8,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 add_definitions("-Wl,-rpath,/opt/GuzalAida/lib")
 link_directories("/opt/GuzalAida/lib")
 
-include_directories("./displayinfo")
+include_directories("./displayinfo" "/opt/GuzalAida/include/wiringPi")
 
-add_executable(${PROJECT_NAME} "displayinfo/displayinfo.c" "displayinfo/getinfo.h" "displayinfo/lcd1602.h")
+add_executable(${PROJECT_NAME} "displayinfo/displayinfo.c" "displayinfo/getinfo.h" "displayinfo/lcd1602.h" "/opt/GuzalAida/include/wiringPi/wiringPi.h")
 target_link_libraries(${PROJECT_NAME} PRIVATE wiringPi)

@@ -17,8 +17,8 @@
 //Global variable
 FILE *fp;
 
-char time[16];
-char temp[16];
+char nowtime[16];
+char nowtemp[16];
 char cpu_load[16];
 char io_used[16];
 char RAM_used[16];
@@ -73,14 +73,14 @@ void get_now_time(){
   time_t lt;
   lt=time(NULL);
   ptr=localtime(&lt);
-  strftime(time,16,"%I:%M:%S - %b",ptr);
+  strftime(nowtime,16,"%I:%M:%S - %b",ptr);
 }
 
 char *get_cpu_temp(){
   fp=popen("cat /sys/class/thermal/thermal_zone0/temp","r");
   fscanf(fp,"%d",&cpu_temp);
   cpu_temp=cpu_temp/1000;
-  sprintf(temp,"%1f",cpu_temp);
+  sprintf(nowtemp,"%1f",cpu_temp);
   pclose(fp);
 }
 

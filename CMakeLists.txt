@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(displayLcdInfo)
+project(displayinfo4lcd)
 
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

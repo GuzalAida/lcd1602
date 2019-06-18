@@ -7,6 +7,7 @@
 
 #include <time.h>
 #include <stdio.h>
+#include <syslog.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
@@ -18,6 +19,7 @@
 FILE *fp;
 char nowtime[16];
 char cpu_load[16];
+int lcdprint_page=1;
 
 void gpio_init(void);
 void lcd1602_control(uchar cmd);
@@ -35,18 +37,20 @@ int main(int argc, char const *argv[]){
   lcdprint("   Welcome to",1);
   lcdprint(" GuzalAida CVN",2);
   sleep(3);
-  int lcdprint_page=1;
+  openlog("displayinfo4lcd",LOG_CONS | LOG_PID,LOG_LOCAL0);
+  syslog(LOG_INFO,"LCD1606 display info starting...");
   while(1){
-    if(lcdprint_page>3){lcdprint_page=1;}
     lcd1602_control(0x01);//清屏
-    switch(lcdprint_page){
-      case 1:page1(argv[1]);break;
+    page1();
+    /*
+    switch(1){
+      case 1:page1(lcdprint_page);break;
       //case 2:page2();break;
       //case 3:page3();break;
       default:lcdprint_page=1;break;
-    }
+    }*/
     lcdprint_page++;
-    sleep(3);
+    sleep(1);
   }
   return 0;
 }
@@ -59,8 +63,10 @@ void page1(){
   strftime(nowtime,16,"%I:%M:%S - %b",ptr);
   lcdprint(nowtime,1);
   fp=popen("uptime | awk '{print $9,$10,$11,$12}'","r");
-  fscanf(fp,"%s",&cpu_load);
+  fgets(cpu_load,16,fp);
   lcdprint(cpu_load,2);
+  printf("Time: %s --- Load: %s\n",nowtime,cpu_load);
+  if(lcdprint_page>100){syslog(LOG_INFO,"Time: %s --- Load: %s\n",nowtime,cpu_load);lcdprint_page=0;}
   pclose(fp);
 
 }

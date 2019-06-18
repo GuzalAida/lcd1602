@@ -27,9 +27,9 @@ float cpu_temp=0;
 
 void gpio_init(void);
 void lcd1602_control(uchar cmd);
-void lcd1602_command(uchar dat)
-void lcd1602_setmode(void)
-void lcdprint(uchar *p,int row_number)
+void lcd1602_command(uchar dat);
+void lcd1602_setmode(void);
+void lcdprint(uchar *p,int row_number);
 
 void page1();
 void page2();

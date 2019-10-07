@@ -5,10 +5,10 @@ project(displayinfo4lcd)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 
-add_definitions("-Wl,-rpath,/opt/GuzalAida/lib")
-link_directories("/opt/GuzalAida/lib")
+add_definitions("-Wl,-rpath,/opt/wiringPi/lib")
+link_directories("/opt/wiringPi/lib")
 
-include_directories("./displayinfo" "/opt/GuzalAida/include/wiringPi")
+include_directories("./displayinfo" "/opt/wiringPi/include/wiringPi")
 
-add_executable(${PROJECT_NAME} "displayinfo/displayinfo4lcd.c" "/opt/GuzalAida/include/wiringPi/wiringPi.h")
+add_executable(${PROJECT_NAME} "displayinfo/displayinfo4lcd.c" "/opt/wiringPi/include/wiringPi/wiringPi.h")
 target_link_libraries(${PROJECT_NAME} PRIVATE wiringPi)

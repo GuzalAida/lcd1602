@@ -73,33 +73,33 @@ void page1(){
 
 void gpio_init(){
     //data pin(0 to 7) Setpin
-    pinMode(24,OUTPUT);
-    pinMode(26,OUTPUT);
-    pinMode(19,OUTPUT);
+    pinMode(10,OUTPUT);
+    pinMode(11,OUTPUT);
+    pinMode(12,OUTPUT);
+    pinMode(13,OUTPUT);
+    pinMode(14,OUTPUT);
     pinMode(21,OUTPUT);
+    pinMode(22,OUTPUT);
     pinMode(23,OUTPUT);
-    pinMode(29,OUTPUT);
-    pinMode(31,OUTPUT);
-    pinMode(33,OUTPUT);
 
-    pinMode(32,OUTPUT); //RS Setpin
-    pinMode(36,OUTPUT); //EN Setpin
+    pinMode(26,OUTPUT); //RS Setpin
+    pinMode(27,OUTPUT); //EN Setpin
 }
 
 void lcd1602_control(uchar cmd){
-  digitalWrite(32,LOW); //RS = 0
+  digitalWrite(26,LOW); //RS = 0
   digitalWriteByte(cmd);//GPIO0=cmd
-  digitalWrite(36,HIGH);
+  digitalWrite(27,HIGH);
   delay(5);
-  digitalWrite(36,LOW);
+  digitalWrite(27,LOW);
 }
 
 void lcd1602_command(uchar dat){
-  digitalWrite(32,HIGH); //RS=1
+  digitalWrite(26,HIGH); //RS=1
   digitalWriteByte(dat);//GPIO0=dat
-  digitalWrite(36,HIGH);// EN=1;
+  digitalWrite(27,HIGH);// EN=1;
   delay(5);     
-  digitalWrite(36,LOW);// EN=0;       
+  digitalWrite(27,LOW);// EN=0;       
 }
 
 void lcd1602_setmode(void){

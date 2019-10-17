@@ -8,7 +8,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 add_definitions("-Wl,-rpath,/opt/wiringPi/lib")
 link_directories("/opt/wiringPi/lib")
 
-include_directories("./displayinfo" "/opt/wiringPi/include/wiringPi")
+include_directories("./displayinfo" "/opt/wiringPi/include/wiringPi" "/opt/wiringPi/include/wiringDev")
 
-add_executable(${PROJECT_NAME} "displayinfo/displayinfo4lcd.c" "/opt/wiringPi/include/wiringPi/wiringPi.h")
-target_link_libraries(${PROJECT_NAME} PRIVATE wiringPi)
+add_executable(${PROJECT_NAME} "displayinfo/displayinfo4lcd.c" "/opt/wiringPi/include/wiringPi/wiringPi.h" "/opt/wiringPi/include/wiringPi/wiringPiI2C.h" "/opt/wiringPi/include/wiringDev/lcd.h")
+target_link_libraries(${PROJECT_NAME} PRIVATE wiringPi wiringPiDev)

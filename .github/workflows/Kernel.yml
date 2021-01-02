@@ -16,8 +16,12 @@ jobs:
       run: wget "https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.03/binrel/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz?revision=2e88a73f-d233-4f96-b1f4-d8b36e9bb0b9&la=en&hash=167687FADA00B73D20EED2A67D0939A197504ACD" -O ~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz
     - name: unzip gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz
       run: tar -Jxvf ~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz -C ~/
-    - name: test tar
-      run: ls -alh ~/ > log.txt
+    - name: set PATH
+      run: export PATH=/~/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin:${PATH}
+    - name: build kernel
+      run: make -j9 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
+    - name: copy source
+      run: mkdir bootpart;bash archive.sh
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -35,6 +39,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./log.txt
-        asset_name: log.txt
-        asset_content_type: text/plain
+        asset_path: ./release.tat.gz
+        asset_name: release.tat.gz
+        asset_content_type: application/gzip

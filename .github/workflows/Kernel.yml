@@ -19,7 +19,7 @@ jobs:
     - name: set PATH
       run: export PATH=~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu/bin:${PATH}
     - name: build kernel
-      run: echo ${PATH} > log.txt
+      run: echo ${PATH} > log.txt; ls -alh ~ >> log.txt
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1

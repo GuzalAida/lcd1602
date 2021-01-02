@@ -17,11 +17,9 @@ jobs:
     - name: unzip gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz
       run: tar -Jxvf ~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz -C ~/
     - name: set PATH
-      run: export PATH=/~/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin:${PATH}
+      run: export PATH=~/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin:${PATH}
     - name: build kernel
-      run: make -j9 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
-    - name: copy source
-      run: mkdir bootpart;bash archive.sh
+      run: echo ${PATH} > log.txt
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -39,6 +37,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./release.tat.gz
-        asset_name: release.tat.gz
+        asset_path: ./log.txt
+        asset_name: log.txt
         asset_content_type: application/gzip

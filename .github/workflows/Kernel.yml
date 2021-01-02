@@ -17,9 +17,9 @@ jobs:
     - name: unzip gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz
       run: tar -Jxvf ~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz -C ~/
     - name: set PATH
-      run: export PATH=~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu/bin:${PATH}
+      run: PATH=/home/runner/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu/bin:${PATH}
     - name: build kernel
-      run: echo ${PATH} > log.txt; ls -alh ~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu >> log.txt
+      run: echo ${PATH} > log.txt; ls -alh ~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu/bin >> log.txt
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1

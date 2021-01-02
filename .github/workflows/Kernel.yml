@@ -2,7 +2,6 @@ name: Make Rpi64 Kernel CI
 
 on:
   push:
-    branches: [ rpi-4.19.y ]
 
 jobs:
   build:

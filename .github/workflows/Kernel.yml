@@ -17,7 +17,7 @@ jobs:
     - name: unzip gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz
       run: tar -Jxvf ~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu.tar.xz -C ~/
     - name: set PATH
-      run: export PATH=~/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin:${PATH}
+      run: export PATH=~/gcc-arm-8.3-2019.03-x86_64-aarch64-linux-gnu/bin:${PATH}
     - name: build kernel
       run: echo ${PATH} > log.txt
     - name: Create Release
